@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LABEL PRINTING DEPARTMENT | CGI - GII</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%);
+            animation: gradient-shift 15s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, -50px); }
+        }
+        
+        /* Header Section */
+        .header {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 30px 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .logo-section {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex: 1;
+        }
+        
+        .logo-container {
+            position: relative;
+        }
+        
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .logo-container:hover::before {
+            opacity: 0.2;
+        }
+        
+        .logo-container img {
+            width: 280px;
+            height: 90px;
+            object-fit: contain;
+            border-radius: 10px;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+        }
+        
+        .logo-container:hover img {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+        
+        /* Title Section */
+        .title-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 80px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin-bottom: 80px;
+            backdrop-filter: blur(10px);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .title-box h1 {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .title-box h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+        }
+        
+        .title-box p {
+            font-size: 20px;
+            color: #5a6c7d;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Cards Container */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 300px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 100px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .card:hover::before {
+            left: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card.acetate {
+            border-top: 5px solid #667eea;
+        }
+        
+        .card.brown {
+            border-top: 10px solid #8b4513;
+        }
+        
+        /* Card Icon - Now using images */
+        .card-icon {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto 30px;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            padding: 10px;
+        }
+        
+        .card.brown .card-icon {
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.4);
+        }
+        
+        .card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            border-radius: 70%;
+        }
+        
+        .card:hover .card-icon {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+        
+        .card.brown:hover .card-icon {
+            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.6);
+        }
+        
+        .card:hover .card-icon img {
+            transform: scale(1.05);
+        }
+        
+        .card h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .card p {
+            font-size: 18px;
+            color: #5a6c7d;
+            margin-bottom: 35px;
+            line-height: 1.7;
+        }
+        
+        .card-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            letter-spacing: 1px;
+        }
+        
+        .card.brown .card-button {
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+        }
+        
+        .card-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        }
+        
+        .card.brown .card-button:hover {
+            box-shadow: 0 12px 35px rgba(139, 69, 19, 0.6);
+        }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e9ecef;
+        }
+        
+        .feature {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .feature-text {
+            font-size: 16px;
+            color: #5a6c7d;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        .footer {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+        
+        .footer p {
+            color: #5a6c7d;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #764ba2;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .title-box {
+                padding: 40px 30px;
+            }
+            
+            .title-box h1 {
+                font-size: 36px;
+            }
+            
+            .title-box h2 {
+                font-size: 28px;
+            }
+            
+            .title-box p {
+                font-size: 18px;
+            }
+            
+            .card {
+                padding: 40px 25px;
+            }
+            
+            .card h3 {
+                font-size: 26px;
+            }
+            
+            .logo-container img {
+                width: 200px;
+                height: 70px;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title-box h1 {
+                font-size: 28px;
+            }
+            
+            .title-box h2 {
+                font-size: 22px;
+            }
+            
+            .card-icon {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-container">
+                    <!-- استبدل هذا المسار بمسار شعار Canon الخاص بك -->
+                    <img src="CANON.jpg" alt="Canon Global Industries">
+                </div>
+                <div class="logo-container">
+                    <!-- استبدل هذا المسار بمسار شعار Globe الخاص بك -->
+                    <img src="GLOBE.jpg" alt="Globe International Industries">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Title Section -->
+        <div class="title-box">
+            <h1>WELCOME TO LABEL PRINTING DEPARTMENT</h1>
+            <h2>GLOBE INTERNATIONAL INDUSTRIES | CANON GLOBAL INDUSTRIES</h2>
+            <p>We provide samples of acetate and brown stickers, and we can create any shape regardless of its complexity</p>
+        </div>
+
+        <!-- Cards Container -->
+        <div class="cards-container">
+            <!-- Acetate Labels Card -->
+            <div class="card acetate">
+                <div class="card-icon">
+                    <img src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/ACETATE.jpg" alt="Acetate Label">
+                </div>
+                <h3>ACETATE LABEL</h3>
+                <p>Explore our high-quality acetate label collection for premium brands</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">✨</div>
+                        <div class="feature-text">جودة عالية</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎨</div>
+                        <div class="feature-text">تصاميم احترافية</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📏</div>
+                        <div class="feature-text">مقاسات متنوعة</div>
+                    </div>
+                </div>
+                <br>
+                <a href="ACETATE.HTML" class="card-button">SHOW ACETATE LABEL</a>
+            </div>
+
+            <!-- Brown Sticker Card -->
+            <div class="card brown">
+                <div class="card-icon">
+                    <img src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/BROWN%20STICKER.png" alt="Brown Sticker">
+                </div>
+                <h3>BROWN STICKER</h3>
+                <p>Check out our specialized brown sticker collection featuring unique and varied designs</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">💪</div>
+                        <div class="feature-text">متينة وقوية</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🌟</div>
+                        <div class="feature-text">تشطيب ممتاز</div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-text">تسليم سريع</div>
+                    </div>
+                </div>
+                <br>
+                <a href="BROWN STICKER.HTML" class="card-button">SHOW BROWN STICKER</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 LABEL PRINTING DEPARTMENT | جميع الحقوق محفوظة</p>
+        <div class="footer-links">
+            <a href="#about">من نحن</a>
+            <a href="#services">خدماتنا</a>
+            <a href="#contact">اتصل بنا</a>
+            <a href="#quality">ضمان الجودة</a>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth hover effects and interactions
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderTopWidth = '8px';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderTopWidth = '5px';
+            });
+        });
+
+        // Add click effect
+        document.querySelectorAll('.card-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.marginLeft = '-50px';
+                ripple.style.marginTop = '-50px';
+                ripple.style.left = e.clientX - this.getBoundingClientRect().left + 'px';
+                ripple.style.top = e.clientY - this.getBoundingClientRect().top + 'px';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                from {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

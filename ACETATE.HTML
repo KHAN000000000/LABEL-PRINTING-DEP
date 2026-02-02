@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACETATE LABEL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        /* Navigation Menu */
+        .nav-menu {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .nav-menu li {
+            margin: 0;
+        }
+        
+        .nav-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255,255,255,0.1);
+            border-bottom-color: white;
+        }
+        
+        /* Header Section */
+        .header-logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 80px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .header-logos img {
+            width: 300px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+        }
+        
+        .header-logos img:hover {
+            transform: scale(1.08) translateY(-5px);
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+        }
+        
+        /* Title Section */
+        .title-section {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .title-section h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin: 15px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .title-section h2 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(255,255,255,0.3);
+            letter-spacing: 1.5px;
+        }
+        
+        /* Labels Container */
+        .labels-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Individual Label Section */
+        .label-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 80px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .label-section:hover {
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+        
+        .label-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+            flex-wrap: wrap;
+        }
+        
+        /* Label Images */
+        .label-image-wrapper {
+            position: relative;
+        }
+        
+        .label-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 60px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .label-image-wrapper:hover::before {
+            opacity: 0.2;
+        }
+        
+        .label-container img.label-img {
+            width: 220px;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border: 3px solid #e9ecef;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 50px;
+            transition: all 0.5s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .label-container img.label-img:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+        
+        /* Text and Logo Section */
+        .text-with-logo {
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        .text-with-logo h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .text-with-logo h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
+        .text-with-logo .logo {
+            width: 240px;
+            height: auto;
+            margin-top: 20px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+            transition: all 0.3s ease;
+        }
+        
+        .text-with-logo .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 8px 20px rgba(102, 126, 234, 0.3));
+        }
+        
+        /* Specific adjustments for different labels */
+        .label-section.decathlon .label-container img.label-img {
+            width: 300px;
+            height: 400px;
+        }
+        
+        .label-section.defacto .label-container img.label-img {
+            width: 180px;
+            height: 500px;
+        }
+        
+        .label-section.lcwaikiki .label-container img.label-img,
+        .label-section.tcw .label-container img.label-img {
+            width: 220px;
+            height: 480px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .header-logos {
+                flex-direction: column;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+            
+            .label-container {
+                gap: 50px;
+            }
+            
+            .label-section {
+                padding: 40px 30px;
+            }
+            
+            .title-section h1 {
+                font-size: 32px;
+            }
+            
+            .title-section h2 {
+                font-size: 24px;
+            }
+            
+            .text-with-logo h2 {
+                font-size: 28px;
+            }
+            
+            .nav-menu a {
+                padding: 15px 20px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Decorative Elements */
+        .decorative-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #667eea, #764ba2, transparent);
+            margin: 40px 0;
+        }
+        
+        /* Animation on scroll */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .label-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="ACETATE.HTML" class="active">ACETATE LABELS</a></li>
+            <li><a href="BROWN STICKER.HTML">BROWN STICKER</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header with Logos -->
+    <div class="header-logos">
+        <img src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/CANON.jpg" alt="Canon Logo">
+        <img src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/GLOBE.jpg" alt="Canon Logo">
+    </div>
+
+    <!-- Title Section -->
+    <div class="title-section">
+        <h1>GLOBE INTERNATIONAL INDUSTRIES</h1>
+        <h1>CANON GLOBAL INDUSTRIES</h1>
+        <h2>SAMPLE OF LABEL ACETATE</h2>
+    </div>
+
+    <!-- Labels Container -->
+    <div class="labels-container">
+        
+        <!-- Decathlon Label -->
+        <div class="label-section decathlon">
+            <div class="label-container">
+                <div class="label-image-wrapper">
+                    <img class="label-img" src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/YN1.png" alt="Decathlon Label">
+                </div>
+                <div class="text-with-logo">
+                    <h2>DECATHLON ACETATE LABEL</h2>
+                    <img class="logo" src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/Picture3.png" alt="Decathlon Logo">
+                </div>
+            </div>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <!-- LC Waikiki Label -->
+        <div class="label-section lcwaikiki">
+            <div class="label-container">
+                <div class="text-with-logo">
+                    <h2>LC WAIKIKI ACETATE LABEL</h2>
+                    <img class="logo" src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/Picture4.png" alt="LC Waikiki Logo">
+                </div>
+                <div class="label-image-wrapper">
+                    <img class="label-img" src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/YN2.png" alt="LC Waikiki Label">
+                </div>
+            </div>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <!-- Defacto Label -->
+        <div class="label-section defacto">
+            <div class="label-container">
+                <div class="label-image-wrapper">
+                    <img class="label-img" src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/YN3.png" alt="Defacto Label">
+                </div>
+                <div class="text-with-logo">
+                    <h2>DEFACTO ACETATE LABEL</h2>
+                    <img class="logo" src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/Picture5.png" alt="Defacto Logo">
+                </div>
+            </div>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <!-- TCW-Catalyst Label -->
+        <div class="label-section tcw">
+            <div class="label-container">
+                <div class="text-with-logo">
+                    <h2>TCW-CATALYST ACETATE LABEL</h2>
+                    <img class="logo" src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/Picture6.png" alt="TCW-Catalyst Logo">
+                </div>
+                <div class="label-image-wrapper">
+                    <img class="label-img" src="file:///C:/Users/yassi/OneDrive/Desktop/LABEL%20DEP/YN4.png" alt="TCW-Catalyst Label">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
